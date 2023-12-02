@@ -40,9 +40,9 @@ fn part2(input: &str) -> Result<i64, Box<dyn Error>> {
 }
 
 fn main() {
-    let input = std::fs::read_to_string("./inputs/day01.txt").unwrap();
-    dbg!(part1(&input));
-    dbg!(part2(&input));
+    let input = std::fs::read_to_string("./inputs/day-01.txt").unwrap();
+    dbg!(part1(&input).unwrap());
+    dbg!(part2(&input).unwrap());
 }
 
 #[test]
