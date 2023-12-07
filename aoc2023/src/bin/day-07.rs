@@ -58,7 +58,7 @@ enum HandType {
 }
 
 fn hand_type(hand: &[Card], jack_as_joker: bool) -> HandType {
-    let mut card_map: HashMap<Card, usize> =
+    let mut card_count: HashMap<Card, usize> =
         hand.iter().cloned().fold(HashMap::new(), |mut map, card| {
             *map.entry(card).or_insert(0) += 1;
             map
@@ -66,13 +66,13 @@ fn hand_type(hand: &[Card], jack_as_joker: bool) -> HandType {
 
     let jokers = match jack_as_joker {
         false => 0,
-        true => card_map
+        true => card_count
             .remove(&card_value('J', true))
             .unwrap_or(0),
     };
-    let max_card_count = card_map.values().max().unwrap_or(&0);
+    let max_card_count = card_count.values().max().unwrap_or(&0);
 
-    match card_map.len() {
+    match card_count.len() {
         0 | 1 => HandType::FiveOfAKind,
         2 => match max_card_count + jokers {
             4 => HandType::FourOfAKind,
